@@ -1,0 +1,37 @@
+<p>sign-up works!</p>
+
+<form (ngSubmit)="myForm.valid && onSubmit()" #myForm="ngForm">
+    <div>
+        <label for="mail">Mail</label>
+        <input name="mail" type="email" [(ngModel)]="user.mail" #mail="ngModel" required email>
+    </div>
+    <div *ngIf="myForm.submitted && mail.errors">
+        <span *ngIf="mail.errors.required">Le champ email est requis</span>
+        <span *ngIf="mail.errors.email">L'email est invalide</span>
+    </div>
+
+    <div>
+      <label for="firstname">firstname</label>
+      <input name="firstname" type="text" [(ngModel)]="user.firstname" #firstname="ngModel" required minlength="3" maxlength="15"/>
+    </div>
+    <!-- Message d'erreurs -->
+    <div *ngIf="myForm.submitted && firstname.errors">
+      <span *ngIf="firstname.errors?.required">Le prénom est requis</span>
+      <span *ngIf="firstname.errors?.minlength">Le prénom doit comporter au moins 3 caractères</span>
+      <span *ngIf="firstname.errors?.maxlength">Le prénom ne doit pas dépasser 15 caractères</span>
+    </div>
+
+    
+    <div>
+        <label for="lastname">lastname</label>
+        <input name="lastname" type="text" [(ngModel)]="user.lastname" #lastname="ngModel" required minlength="3" maxlength="15"/>
+      </div>
+      <!-- Message d'erreurs -->
+      <div *ngIf="myForm.submitted && lastname.errors">
+        <span *ngIf="lastname.errors?.required">Le nom est requis</span>
+        <span *ngIf="lastname.errors?.minlength">Le nom doit comporter au moins 3 caractères</span>
+        <span *ngIf="lastname.errors?.maxlength">Le nom ne doit pas dépasser 15 caractères</span>
+      </div>
+
+      <button type="submit">S'incrire</button>
+</form>
